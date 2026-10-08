@@ -1,0 +1,31 @@
+{
+  "name": "stepharness",
+  "productName": "StepHarness",
+  "version": "0.1.0",
+  "description": "StepHarness：开发者自建的桌面编程 Agent（自研 TypeScript 内核 + Electron）",
+  "main": "dist/main.js",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "start": "node scripts/build.mjs && electron .",
+    "dev": "node scripts/build.mjs && electron . --dev",
+    "cli": "node scripts/build.mjs && node dist/cli.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node scripts/test.mjs",
+    "test:ui": "node scripts/build.mjs && node test/e2e-mock.cjs",
+    "test:live": "node scripts/test.mjs --live",
+    "screenshot": "node scripts/build.mjs && node scripts/screenshot.cjs",
+    "package": "node scripts/build.mjs && node scripts/package.mjs"
+  },
+  "devDependencies": {
+    "@electron/fuses": "^2.1.3",
+    "@types/node": "^26.6.4",
+    "electron": "41.1.1",
+    "esbuild": "^0.28.2",
+    "playwright-core": "^1.64.0",
+    "typescript": "^7.0.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

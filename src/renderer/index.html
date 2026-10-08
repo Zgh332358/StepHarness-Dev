@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'" />
+  <title>StepHarness</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <aside id="sidebar">
+      <div class="side-top drag"></div>
+      <button id="btn-new" class="side-btn"><span class="ico">✎</span>新对话<kbd>⌘N</kbd></button>
+
+      <div class="side-label">工作区</div>
+      <button id="ws-btn" class="ws-btn" title="切换工作区（⌘O）">
+        <span class="ico">▸</span><span id="ws-name" class="ws-name"></span>
+      </button>
+      <div id="ws-recent" class="ws-recent hidden"></div>
+
+      <div class="side-label">会话 <span id="session-count" class="muted"></span></div>
+      <ul id="session-list"></ul>
+
+      <div class="side-footer">
+        <button id="btn-settings" class="side-btn small"><span class="ico">⚙</span>设置</button>
+      </div>
+    </aside>
+
+    <main id="main">
+      <header id="topbar" class="drag">
+        <div id="title" class="title no-drag" title="双击重命名"></div>
+        <div class="spacer"></div>
+        <div class="no-drag picker-wrap">
+          <button id="model-btn" class="pill" title="切换模型"><span id="model-name"></span><span class="caret">▾</span></button>
+          <div id="model-pop" class="popover hidden">
+            <input id="model-search" placeholder="搜索模型…" spellcheck="false" />
+            <div id="model-items" class="pop-items"></div>
+          </div>
+        </div>
+        <select id="thinking" class="pill no-drag" title="思考强度">
+          <option value="off">不思考</option><option value="low">思考：低</option><option value="medium">思考：中</option><option value="high">思考：高</option>
+        </select>
+        <button id="sandbox-pill" class="pill sandbox no-drag"></button>
+        <div id="mode" class="segmented no-drag" title="审批模式">
+          <button data-mode="ask" title="修改文件和执行命令前都询问">询问</button>
+          <button data-mode="auto-edit" title="工作区内的文件修改自动执行，命令需询问（只读命令除外）">自动编辑</button>
+          <button data-mode="full-auto" title="全部自动执行，不再询问">全自动</button>
+        </div>
+      </header>
+
+      <section id="thread">
+        <div id="empty" class="empty">
+          <div class="logo">⚒</div>
+          <h1>要做点什么？</h1>
+          <p id="empty-ws" class="mono muted"></p>
+          <p id="empty-docs" class="muted small"></p>
+          <div id="onboard" class="onboard hidden">
+            <p>还没有配置模型服务。添加一个服务并填写你自己的 API Key 后就可以开始。</p>
+            <button id="onboard-btn" class="primary-sm">＋ 添加模型服务</button>
+          </div>
+          <div class="suggestions">
+            <button>解释一下这个项目的结构和主要模块</button>
+            <button>找出代码里潜在的 bug 并修复</button>
+            <button>为核心逻辑补充单元测试</button>
+            <button>总结最近的 git 提交做了什么</button>
+          </div>
+        </div>
+        <div id="messages"></div>
+      </section>
+
+      <footer id="bottom">
+        <div id="queue" class="queue hidden"></div>
+        <div id="composer">
+          <div id="attachments"></div>
+          <textarea id="input" rows="1" placeholder="描述任务，⏎ 发送，⇧⏎ 换行；可以粘贴或拖入图片"></textarea>
+          <div class="bar">
+            <label class="icon-btn" title="添加图片"><input id="file" type="file" accept="image/*" multiple hidden />＋</label>
+            <span id="status" class="status"></span>
+            <div class="spacer"></div>
+            <span id="ctx" class="ctx"></span>
+            <button id="btn-stop" class="round stop hidden" title="停止（Esc）">■</button>
+            <button id="btn-send" class="round" title="发送">↑</button>
+          </div>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <div id="modal" class="modal hidden"><div id="modal-card" class="modal-card"></div></div>
+  <div id="toasts"></div>
+  <div id="drop" class="drop hidden">松开以添加图片</div>
+  <script src="app.js" defer></script>
+</body>
+</html>
